@@ -4,9 +4,6 @@
 // variabile del pulsante play
 const myButton = document.getElementById("play");
 
-let cellsNumber; // perché non funziona dentro addEventListener?
-let cellsPerRow;
-
 // funzione che parte quando il pulsante viene azionato
 myButton.addEventListener("click", function (){
 
@@ -20,6 +17,13 @@ myButton.addEventListener("click", function (){
     // variabile del container
     const myContainer = document.querySelector(".container");
 
+    //varibili dei quadrati
+    let cellsNumber;
+    let cellsPerRow;
+
+    // variabile per array bombe
+    const totalBombs = 16;
+    console.log(totalBombs);
 
     //switch per la selezione del livello
     switch (selectLevel) {
@@ -53,6 +57,32 @@ myButton.addEventListener("click", function (){
             // }
     }
 
+    //creo la funzione per le bombe da mettere DOPO lo switch perché dipende da questo
+    function createBombs () {
+        //creo array vuoto
+        const arrayBombs = [];
+
+        //mi serve il ciclo while per le bombe rosse
+        while (arrayBombs.length < totalBombs){
+            //variabile per numero random
+            const randomNumber = generateRandom(1, cellsNumber);
+            //prima di pushare devo evitare doppioni
+            if(!arrayBombs.includes(randomNumber)) {
+                //ora devo inserire il numero nell'array
+                arrayBombs.push(randomNumber);
+            }
+        }
+        console.log(arrayBombs); 
+    } 
+
+    //dopo devo invocarla perché altrimenti JS non fa nulla!
+    createBombs();
+
+    //creo una funzione per il random e al posto degli argomenti gli passerò la variabile che determina il numero delle celle (100/81/49);
+    function generateRandom (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     cellsPerRow = Math.sqrt(cellsNumber);
     //console.log(cellsPerRow);
 
@@ -72,8 +102,14 @@ myButton.addEventListener("click", function (){
 
         //al click aggiungo la classe active
         node.addEventListener("click", function(){
-        this.classList.add("active");
+            this.classList.add("active");
         });
+
+        // NON FUNZIONA
+        //al click rimuovo la classe active 
+        // node.removeEventListener("click", function(){
+        //     this.classList.remove("active");
+        // });
     }
 
 });
