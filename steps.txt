@@ -1,0 +1,14 @@
+Consegna 
+
+L'utente indica un livello di difficoltà in base al quale viene generata una griglia di gioco quadrata, in cui ogni cella contiene un numero tra quelli compresi in un range:
+// con difficoltà 1 => tra 1 e 100
+// con difficoltà 2 => tra 1 e 81
+// con difficoltà 3 => tra 1 e 49
+// Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
+
+1) Struttura della pagina html e css;
+2) Costruisci la griglia generale con html e css;
+3) Commenta la griglia in html e inseriscila con JS;
+4) Per la parte con JS avrai bisogno di 3 diverse classi CSS per il cubo dato che le larghezze di questi cambiano;
+5) Commenta CSS e vai ad inserire i cubi in maniera dinamica;
+6) Inserisci l'evento al click del button
