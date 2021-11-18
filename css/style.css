@@ -38,7 +38,7 @@ h1 {
     width: 700px;
     height: 700px;
     margin: 50px auto;
-    border: 2px solid #beaf5f;
+    border: 3px solid #beaf5f;
 }
 /* *** clearfix *** */
 .container::after {
@@ -48,8 +48,13 @@ h1 {
 }
 
 .cube {
-    border: 2px solid #beaf5f;
+    color: #beaf5f;
+    font-size: 40px;
+    border: 3px solid #beaf5f;
     float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cube.easy {
