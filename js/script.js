@@ -66,8 +66,14 @@ myButton.addEventListener("click", function (){
         node.innerHTML = i;
         node.style.width = size;
         node.style.height = size;
-        console.log(node);
+
+        // console.log(node);
         myContainer.appendChild(node);
+
+        //al click aggiungo la classe active
+        node.addEventListener("click", function(){
+        this.classList.add("active");
+        });
     }
-    
+
 });
