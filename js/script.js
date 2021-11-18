@@ -57,6 +57,11 @@ myButton.addEventListener("click", function (){
             // }
     }
 
+
+    const generateBombs = createBombs();
+    console.log(generateBombs);
+    //console.log(generate); funziona
+
     //creo la funzione per le bombe da mettere DOPO lo switch perché dipende da questo
     function createBombs () {
         //creo array vuoto
@@ -70,13 +75,11 @@ myButton.addEventListener("click", function (){
             if(!arrayBombs.includes(randomNumber)) {
                 //ora devo inserire il numero nell'array
                 arrayBombs.push(randomNumber);
-            }
+            }   
         }
-        console.log(arrayBombs); 
+        // console.log(arrayBombs); 
+        return arrayBombs;
     } 
-
-    //dopo devo invocarla perché altrimenti JS non fa nulla!
-    createBombs();
 
     //creo una funzione per il random e al posto degli argomenti gli passerò la variabile che determina il numero delle celle (100/81/49);
     function generateRandom (min, max) {
@@ -100,9 +103,22 @@ myButton.addEventListener("click", function (){
         // console.log(node);
         myContainer.appendChild(node);
 
-        //al click aggiungo la classe active
+
+        //variabile per contare le giocate
+        let giocata = "";
+
+        //al click aggiungo la classe active con il controllo della bomba
         node.addEventListener("click", function(){
-            this.classList.add("active");
+            const giocate = giocata + 1;
+            console.log(giocata);
+
+            if(generateBombs.includes(parseInt(this.textContent))) {
+                this.classList.add("bomb");
+                alert("Hai perso");
+            }
+            else {
+                this.classList.add("active");
+            }
         });
 
         // NON FUNZIONA
@@ -111,5 +127,4 @@ myButton.addEventListener("click", function (){
         //     this.classList.remove("active");
         // });
     }
-
 });
