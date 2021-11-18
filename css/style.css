@@ -47,6 +47,8 @@ h1 {
     clear: both;
 }
 
+/* *** configurazione quadrati *** */
+
 .cube {
     color: #beaf5f;
     font-size: 40px;
@@ -78,4 +80,9 @@ h1 {
 
 .bomb {
     background-color: #733223;
+}
+
+.risultato {
+    font-size: 40px;
+    text-align: center;
 }

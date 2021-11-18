@@ -105,12 +105,12 @@ myButton.addEventListener("click", function (){
 
 
         //variabile per contare le giocate
-        let giocata = "";
+        let giocata = 0;
 
         //al click aggiungo la classe active con il controllo della bomba
         node.addEventListener("click", function(){
-            const giocate = giocata + 1;
-            console.log(giocata);
+            const giocate = giocata + giocata;
+            console.log(giocate);
 
             if(generateBombs.includes(parseInt(this.textContent))) {
                 this.classList.add("bomb");
@@ -120,6 +120,8 @@ myButton.addEventListener("click", function (){
                 this.classList.add("active");
             }
         });
+
+        // document.querySelector(".risultato").innerHTML = "Il tuo punteggio è" + giocate;
 
         // NON FUNZIONA
         //al click rimuovo la classe active 
