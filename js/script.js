@@ -23,7 +23,7 @@ myButton.addEventListener("click", function (){
 
     // variabile per array bombe
     const totalBombs = 16;
-    console.log(totalBombs);
+    // console.log(totalBombs);
 
     //switch per la selezione del livello
     switch (selectLevel) {
@@ -61,8 +61,57 @@ myButton.addEventListener("click", function (){
     const generateBombs = createBombs();
     console.log(generateBombs);
     //console.log(generate); funziona
+    
+    cellsPerRow = Math.sqrt(cellsNumber);
+    //console.log(cellsPerRow);
 
-    //creo la funzione per le bombe da mettere DOPO lo switch perché dipende da questo
+    // variabile per la larghezza/altezza quadrati 
+    const size = `calc(100% / ${cellsPerRow})`;
+
+    //creo un array per il numero delle mie giocate
+    const arrayAttempts = [];
+
+    //creo una variabile che rappresenta il totale delle giocate possibile, cioè le caselle verdi
+    const attempts = cellsNumber - totalBombs;
+    console.log(attempts);
+
+    // creo un ciclo for per popolare la griglia con un nodo perché usare template literal era complesso (stringa e non oggetto, addEventListener non funziona)
+    for (let i = 1; i <= cellsNumber; i++) {
+        const node = document.createElement("div"); // questo è un oggetto 
+        node.classList.add("cube"); // aggiungo al nodo la mia classe
+        node.innerHTML = i;
+        node.style.width = size;
+        node.style.height = size;
+
+        // console.log(typeof node);
+        myContainer.appendChild(node);
+
+
+        //al click aggiungo la classe active con il controllo della bomba
+        node.addEventListener("click", function(){
+
+            if(generateBombs.includes(i)) {
+                node.classList.add("bomb");
+                myContainer.classList.add("game-over");
+                alert("Hai perso");
+            }
+            else {
+                this.classList.add("active");
+                arrayAttempts.push(i);
+            }
+
+            if(arrayAttempts.length === attempts) {
+                console.log("Hai vinto");
+                alert("Hai vinto");
+            }
+        });
+    }
+
+    console.log(arrayAttempts);
+
+    // ********************************** funzioni
+
+    //questa funzione genera un array di 16 numeri casuali per le bombe;
     function createBombs () {
         //creo array vuoto
         const arrayBombs = [];
@@ -77,56 +126,14 @@ myButton.addEventListener("click", function (){
                 arrayBombs.push(randomNumber);
             }   
         }
+        //ordino array in numero crescente
+        arrayBombs.sort(function(a, b){return a-b});
         // console.log(arrayBombs); 
         return arrayBombs;
     } 
 
-    //creo una funzione per il random e al posto degli argomenti gli passerò la variabile che determina il numero delle celle (100/81/49);
+    //questa funzione genera un numero random;
     function generateRandom (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    cellsPerRow = Math.sqrt(cellsNumber);
-    //console.log(cellsPerRow);
-
-    // variabile per la larghezza/altezza quadrati 
-    const size = `calc(100% / ${cellsPerRow})`;
-
-    // creo un ciclo for per popolare la griglia con un nodo perché usare template literal era complesso (stringa e non oggetto, addEventListener non funziona)
-    for (let i = 1; i <= cellsNumber; i++) {
-        const node = document.createElement("div"); // questo è un oggetto 
-        node.classList.add("cube"); // aggiungo al nodo la mia classe
-        node.innerHTML = i;
-        node.style.width = size;
-        node.style.height = size;
-
-        // console.log(node);
-        myContainer.appendChild(node);
-
-
-        //variabile per contare le giocate
-        let giocata = 0;
-
-        //al click aggiungo la classe active con il controllo della bomba
-        node.addEventListener("click", function(){
-            const giocate = giocata + giocata;
-            console.log(giocate);
-
-            if(generateBombs.includes(parseInt(this.textContent))) {
-                this.classList.add("bomb");
-                alert("Hai perso");
-            }
-            else {
-                this.classList.add("active");
-            }
-        });
-
-        // document.querySelector(".risultato").innerHTML = "Il tuo punteggio è" + giocate;
-
-        // NON FUNZIONA
-        //al click rimuovo la classe active 
-        // node.removeEventListener("click", function(){
-        //     this.classList.remove("active");
-        // });
     }
 });
